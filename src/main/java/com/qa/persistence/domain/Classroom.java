@@ -1,4 +1,6 @@
 package com.qa.persistence.domain;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,6 +12,7 @@ public class Classroom {
 	@Id
 	private Long classroomID;
 	private String trainer;
+	private List<Trainee> trainees;
 	
 	public Classroom() {
 		
