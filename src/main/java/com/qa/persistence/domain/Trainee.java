@@ -4,10 +4,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-
-import com.qa.persistence.domain.Classroom;
 
 @Entity
 public class Trainee {
@@ -15,9 +11,7 @@ public class Trainee {
 	@Id
 	private Long traineeID;
 	private String traineeName;
-	@ManyToOne
-    @JoinColumn(name = "classroomID")
-    private Classroom classroom;
+    private Long classroomID;
 	
 	public Trainee() {
 		
@@ -35,12 +29,8 @@ public class Trainee {
 		this.traineeName = traineeName;
 	}
 
-	public Classroom getClassroom() {
-		return classroom;
-	}
-
-	public void setClassroom(Classroom classroom) {
-		this.classroom = classroom;
+	public Long getClassroomID() {
+		return classroomID;
 	}
 
 	public Long getTraineeID() {

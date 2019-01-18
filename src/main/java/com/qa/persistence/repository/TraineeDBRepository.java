@@ -32,9 +32,7 @@ public class TraineeDBRepository implements TraineeRepository {
 	}
 	
 	@Transactional(REQUIRED)
-	public String addTrainee(Long id, Trainee trainee) {
-		Classroom classroom = findClassroom(id);
-		trainee.setClassroom(classroom);
+	public String addTrainee(Trainee trainee) {
 		manager.persist(trainee);
 		return "{\"message\": \"trainee sucessfully added\"}";
 	}
@@ -62,10 +60,6 @@ public class TraineeDBRepository implements TraineeRepository {
 	
 	private Trainee findTrainee(Long id) {
 		return manager.find(Trainee.class, id);
-	}
-	
-	private Classroom findClassroom(Long id) {
-		return manager.find(Classroom.class, id);
 	}
 
 }

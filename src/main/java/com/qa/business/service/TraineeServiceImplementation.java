@@ -17,9 +17,9 @@ public class TraineeServiceImplementation implements TraineeService {
 		return repo.getTrainees();
 	}
 
-	public String addTrainee(Long id, String traineeJSON) {
+	public String addTrainee(String traineeJSON) {
 		Trainee trainee = util.getObjectForJSON(traineeJSON, Trainee.class);
-		return repo.addTrainee(id, trainee);
+		return repo.addTrainee(trainee);
 	}
 
 	public String deleteTrainee(Long id) {
