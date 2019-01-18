@@ -1,5 +1,5 @@
 package com.qa.persistence.domain;
-
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -15,8 +15,8 @@ public class Classroom {
 	@Id
 	private Long classroomID;
 	private String trainer;
-	@OneToMany(mappedBy="traineeID", cascade=CascadeType.ALL)
-	List<Trainee> trainees;
+	@OneToMany(mappedBy="classroomID", cascade=CascadeType.ALL)
+	private List<Trainee> trainees = new ArrayList<>();
 	
 	public Classroom() {
 		
@@ -40,10 +40,6 @@ public class Classroom {
 
 	public List<Trainee> getTrainees() {
 		return trainees;
-	}
-
-	public void setTrainees(List<Trainee> trainees) {
-		this.trainees = trainees;
 	}
 	
 }

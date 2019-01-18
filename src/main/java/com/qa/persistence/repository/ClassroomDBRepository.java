@@ -26,7 +26,7 @@ public class ClassroomDBRepository implements ClassroomRepository {
 	private JSONUtil util;
 
 	public String getClassrooms() {
-		Query query = manager.createQuery("Select c FROM Classroom c JOIN c.trainees t WHERE t.traineeID = :traineeID");
+		Query query = manager.createQuery("SELECT c FROM Classroom c");
 		Collection<Classroom> classrooms = (Collection<Classroom>) query.getResultList();
 		return util.getJSONForObject(classrooms);
 	}
@@ -39,7 +39,7 @@ public class ClassroomDBRepository implements ClassroomRepository {
 	
 	@Transactional(REQUIRED)
 	public String deleteClassroom(Long id) {
-		Classroom classroomInDB = findAccount(id);
+		Classroom classroomInDB = findClassroom(id);
 		if (classroomInDB != null) {
 			manager.remove(classroomInDB);
 			return "{\"message\": \"classroom sucessfully deleted\"}";
@@ -49,7 +49,7 @@ public class ClassroomDBRepository implements ClassroomRepository {
 	
 	@Transactional(REQUIRED)
 	public String updateClassroom(Long id, Classroom classroom) {
-		Classroom classroomInDB = findAccount(id);
+		Classroom classroomInDB = findClassroom(id);
 		if (classroomInDB != null) {
 			manager.remove(classroomInDB);
 			manager.persist(classroom);
@@ -58,7 +58,7 @@ public class ClassroomDBRepository implements ClassroomRepository {
 		return "{\"message\": \"classroom does not exist\"}";
 	}
 	
-	private Classroom findAccount(Long id) {
+	private Classroom findClassroom(Long id) {
 		return manager.find(Classroom.class, id);
 	}
 

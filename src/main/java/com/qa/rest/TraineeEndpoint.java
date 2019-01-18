@@ -23,8 +23,8 @@ public class TraineeEndpoint {
 	
 	@Path("/json")
 	@POST
-	public String addClassroom(String account) {
-		return service.addTrainee(account);
+	public String addClassroom(String trainee) {
+		return service.addTrainee(trainee);
 	}
 
 	@Path("/json/{id}")
@@ -35,7 +35,7 @@ public class TraineeEndpoint {
 
 	@Path("/json/{id}")
 	@PUT
-	public String updateClassroom(@PathParam("id") Long id, String account) {
-		return service.updateTrainee(id, account);
+	public String updateClassroom(@PathParam("id") Long id, String trainee) {
+		return service.updateTrainee(id, trainee);
 	}
 }
