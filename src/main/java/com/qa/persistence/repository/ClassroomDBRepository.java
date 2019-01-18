@@ -1,5 +1,6 @@
 package com.qa.persistence.repository;
 
+import static javax.transaction.Transactional.TxType.REQUIRED;
 import static javax.transaction.Transactional.TxType.SUPPORTS;
 
 import java.util.Collection;
@@ -29,12 +30,14 @@ public class ClassroomDBRepository implements ClassroomRepository {
 		Collection<Classroom> classrooms = (Collection<Classroom>) query.getResultList();
 		return util.getJSONForObject(classrooms);
 	}
-
+	
+	@Transactional(REQUIRED)
 	public String addClassroom(Classroom classroom) {
 		manager.persist(classroom);
 		return "{\"message\": \"classroom has been sucessfully added\"}";
 	}
-
+	
+	@Transactional(REQUIRED)
 	public String deleteClassroom(Long id) {
 		Classroom classroomInDB = findAccount(id);
 		if (classroomInDB != null) {
@@ -43,7 +46,8 @@ public class ClassroomDBRepository implements ClassroomRepository {
 		}
 		return "{\"message\": \"classroom does not exist\"}";
 	}
-
+	
+	@Transactional(REQUIRED)
 	public String updateClassroom(Long id, Classroom classroom) {
 		Classroom classroomInDB = findAccount(id);
 		if (classroomInDB != null) {

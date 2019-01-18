@@ -1,5 +1,6 @@
 package com.qa.persistence.domain;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,7 +16,7 @@ public class Trainee {
 	@Id
 	private Long traineeID;
 	private String traineeName;
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.ALL)
     @JoinColumn(name = "classroomID")
     private Classroom classroom;
 	
