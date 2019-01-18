@@ -53,15 +53,15 @@ public class TraineeDBRepository implements TraineeRepository {
 
 	@Transactional(REQUIRED)
 	public String updateTrainee(Long id, Trainee trainee) {
-		Trainee traineeInDB = findTrainee(id);
 		Classroom classroom = findClassroom(trainee.getClassroomID());
-		if (traineeInDB != null) {
-			if (classroom != null) {
+		if (classroom != null) {
+			Trainee traineeInDB = findTrainee(id);
+			if (traineeInDB != null) {
 				manager.remove(traineeInDB);
 				manager.persist(trainee);
-				return "{\"message\": \"trainee sucessfully updated\"}";
+				return "{\"message\": \"classroom sucessfully updated\"}";
 			}
-			return "{\"message\": \"classroom does not exist\"}";
+			return "{\"message\": \"trainee does not exist\"}";
 		}
 		return "{\"message\": \"trainee does not exist\"}";
 	}
