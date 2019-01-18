@@ -59,11 +59,11 @@ public class TraineeDBRepository implements TraineeRepository {
 			if (traineeInDB != null) {
 				manager.remove(traineeInDB);
 				manager.persist(trainee);
-				return "{\"message\": \"classroom sucessfully updated\"}";
+				return "{\"message\": \"trainee sucessfully updated\"}";
 			}
 			return "{\"message\": \"trainee does not exist\"}";
 		}
-		return "{\"message\": \"trainee does not exist\"}";
+		return "{\"message\": \"classroom does not exist\"}";
 	}
 
 	private Trainee findTrainee(Long id) {
