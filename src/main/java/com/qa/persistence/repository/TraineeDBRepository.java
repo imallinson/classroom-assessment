@@ -24,19 +24,23 @@ public class TraineeDBRepository implements TraineeRepository {
 
 	@Inject
 	private JSONUtil util;
-	
+
 	public String getTrainees() {
 		Query query = manager.createQuery("SELECT t FROM Trainee t");
 		Collection<Trainee> trainees = (Collection<Trainee>) query.getResultList();
 		return util.getJSONForObject(trainees);
 	}
-	
+
 	@Transactional(REQUIRED)
 	public String addTrainee(Trainee trainee) {
-		manager.persist(trainee);
-		return "{\"message\": \"trainee sucessfully added\"}";
+		Classroom classroom = findClassroom(trainee.getClassroomID());
+		if (classroom != null) {
+			manager.persist(trainee);
+			return "{\"message\": \"trainee sucessfully added\"}";
+		}
+		return "{\"message\": \"classroom does not exist\"}";
 	}
-	
+
 	@Transactional(REQUIRED)
 	public String deleteTrainee(Long id) {
 		Trainee traineeInDB = findTrainee(id);
@@ -46,20 +50,28 @@ public class TraineeDBRepository implements TraineeRepository {
 		}
 		return "{\"message\": \"trainee does not exist\"}";
 	}
-	
+
 	@Transactional(REQUIRED)
 	public String updateTrainee(Long id, Trainee trainee) {
 		Trainee traineeInDB = findTrainee(id);
+		Classroom classroom = findClassroom(trainee.getClassroomID());
 		if (traineeInDB != null) {
-			manager.remove(traineeInDB);
-			manager.persist(trainee);
-			return "{\"message\": \"trainee sucessfully updated\"}";
+			if (classroom != null) {
+				manager.remove(traineeInDB);
+				manager.persist(trainee);
+				return "{\"message\": \"trainee sucessfully updated\"}";
+			}
+			return "{\"message\": \"classroom does not exist\"}";
 		}
 		return "{\"message\": \"trainee does not exist\"}";
 	}
-	
+
 	private Trainee findTrainee(Long id) {
 		return manager.find(Trainee.class, id);
+	}
+
+	private Classroom findClassroom(Long id) {
+		return manager.find(Classroom.class, id);
 	}
 
 }
