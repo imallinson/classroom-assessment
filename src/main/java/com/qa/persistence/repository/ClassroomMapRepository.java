@@ -18,7 +18,7 @@ import com.qa.util.JSONUtil;
 @Alternative
 public class ClassroomMapRepository implements ClassroomRepository {
 	private Map<Long, Classroom> classrooms = new HashMap<>();
-	Long id = (long) 1;
+	Long counter = (long) 1;
 
 	@Inject
 	private JSONUtil util;
@@ -31,8 +31,8 @@ public class ClassroomMapRepository implements ClassroomRepository {
 	@Override
 	@Transactional(REQUIRED)
 	public String addClassroom(Classroom classroom) {
-		classrooms.put(id, classroom);
-		id++;
+		classrooms.put(counter, classroom);
+		counter++;
 		return "{\"message\": \"classroom has been sucessfully added\"}";
 	}
 
@@ -51,8 +51,8 @@ public class ClassroomMapRepository implements ClassroomRepository {
 	public String updateClassroom(Long id, Classroom classroom) {
 		if (classrooms.containsKey(id)) {
 			classrooms.remove(id);
-			classrooms.put(id, classroom);
-			id++;
+			classrooms.put(counter, classroom);
+			counter++;
 			return "{\"message\": \"classroom sucessfully updated\"}";
 		}
 		return "{\"message\": \"classroom does not exist\"}";

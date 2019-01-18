@@ -10,7 +10,7 @@ import com.qa.util.JSONUtil;
 
 public class TraineeMapRepository implements TraineeRepository {
 	private Map<Long, Trainee> trainees = new HashMap<>();
-	Long id = (long) 1;
+	Long counter = (long) 1;
 	
 	ClassroomMapRepository repo = new ClassroomMapRepository();
 
@@ -25,9 +25,9 @@ public class TraineeMapRepository implements TraineeRepository {
 	@Override
 	public String addTrainee(Trainee trainee) {
 		if (repo.getMap().containsKey(trainee.getClassroomID())) {
-			trainees.put(id, trainee);
+			trainees.put(counter, trainee);
 			repo.addTrainee(trainee.getClassroomID(), trainee);
-			id++;
+			counter++;
 			return "{\"message\": \"trainee sucessfully added\"}";
 		}
 		return "{\"message\": \"classroom does not exist\"}";
