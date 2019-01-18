@@ -21,10 +21,10 @@ public class TraineeEndpoint {
 		return service.getTrainees();
 	}
 	
-	@Path("/json")
+	@Path("/json/{id}")
 	@POST
-	public String addClassroom(String account) {
-		return service.addTrainee(account);
+	public String addClassroom(@PathParam("id") Long id, String account) {
+		return service.addTrainee(id, account);
 	}
 
 	@Path("/json/{id}")

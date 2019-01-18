@@ -4,7 +4,7 @@ public interface TraineeService {
 	
 	public String getTrainees();
 
-	public String addTrainee(String traineeJSON);
+	public String addTrainee(Long id, String traineeJSON);
 
 	public String deleteTrainee(Long id);
 	
