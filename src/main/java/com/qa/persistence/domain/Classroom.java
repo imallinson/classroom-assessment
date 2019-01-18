@@ -1,9 +1,13 @@
 package com.qa.persistence.domain;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Classroom {
@@ -11,6 +15,8 @@ public class Classroom {
 	@Id
 	private Long classroomID;
 	private String trainer;
+	@OneToMany(mappedBy="traineeID", cascade=CascadeType.ALL)
+	List<Trainee> trainees;
 	
 	public Classroom() {
 		
@@ -30,6 +36,14 @@ public class Classroom {
 
 	public Long getClassroomID() {
 		return classroomID;
+	}
+
+	public List<Trainee> getTrainees() {
+		return trainees;
+	}
+
+	public void setTrainees(List<Trainee> trainees) {
+		this.trainees = trainees;
 	}
 	
 }
