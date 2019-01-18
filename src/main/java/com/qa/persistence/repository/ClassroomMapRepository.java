@@ -11,6 +11,7 @@ import javax.inject.Inject;
 import javax.transaction.Transactional;
 
 import com.qa.persistence.domain.Classroom;
+import com.qa.persistence.domain.Trainee;
 import com.qa.util.JSONUtil;
 
 @Transactional(SUPPORTS)
@@ -55,6 +56,20 @@ public class ClassroomMapRepository implements ClassroomRepository {
 			return "{\"message\": \"classroom sucessfully updated\"}";
 		}
 		return "{\"message\": \"classroom does not exist\"}";
+	}
+	
+	public Map<Long, Classroom> getMap() {
+		return classrooms;
+	}
+	
+	public boolean addTrainee(Long id, Trainee trainee) {
+		classrooms.get(id).getTrainees().add(trainee);
+		return true;
+	}
+	
+	public boolean deleteTrainee(Long id, Trainee trainee) {
+		classrooms.get(id).getTrainees().remove(trainee);
+		return true;
 	}
 
 }
